@@ -2,6 +2,7 @@
 
 I built a deliberately insecure customer-support agent, threat-modeled it, attacked it with a fixed suite of 27 attacks, then moved the defenses into the harness (the code around the model) and measured again.
 
+![Result](agent-lab-thumbnail.png)
 **Result on Llama 3.1 8B, 3 runs per attack: attack success fell from 68% (55/81) to 0% (0/81), while normal requests succeeded more often, 67% to 89%.**
 
 The point is not the 0%. It is that controls enforced in code held even when the model was fooled, while the one control left to the prompt (grounding) is the one I trust least.
