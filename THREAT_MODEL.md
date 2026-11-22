@@ -103,7 +103,19 @@ The fix is structural: the harness must pass the authenticated user to each tool
 - Misinformation (T1) is reduced, not eliminated.
 - Accepted with monitoring: audit logs, alerts on unusual refund patterns, and human review of approvals.
 
-## 9. Validation plan
+## 9. Limitations of this threat model
+
+| Limitation | Why it matters | How it is mitigated |
+|---|---|---|
+| **Scope is the agent code only.** Infrastructure is out of scope: the Ollama server (an unauthenticated API on port 11434), the host machine, and the supply chain (model weights, Python packages). | A real attacker may skip the agent and go for the model server or a dependency. | In the lab: keep Ollama bound to localhost, pin package versions, record the model digest. Before any real deployment, extend this model to cover infrastructure and supply chain. |
+| **Results are specific to one model** (Llama 3.1 8B). | Larger models may resist simple injections better, yet follow complex ones more capably. Conclusions may not transfer. | Re-run the attack suite against a second model and report results per model. |
+| **Likelihood ratings are judgment, not measurement.** | LLMs are non-deterministic: the same attack can succeed on one run and fail on the next. | The attack suite runs each attack several times and records a success rate. Replace H/M/L with measured rates once available. |
+| **No memory and single-session only.** | Memory poisoning and multi-turn attacks, where an attacker builds up over several messages or plants instructions that persist, are not covered. | Add a memory feature in a later version and extend the threat model and attack suite to cover it. |
+| **Tools and data are simulated.** | Real payment and email providers add their own controls, such as fraud checks and sending limits, and their own failure modes. | Model each real integration's controls when it is added; do not assume them. |
+| **Single reviewer.** | One person's blind spots become the model's blind spots. | Cross-check against the OWASP agentic AI threat guidance, have a second person review it, and feed red-team findings back into this document. |
+| **Frameworks are evolving.** | OWASP categories and MITRE ATLAS techniques are revised over time; the ATLAS mapping is not done yet. | Date-stamp each version, add the ATLAS mapping from the official site, and review this document whenever the agent changes. |
+
+## 10. Validation plan
 
 Each threat becomes an attack category in the attack suite. The suite is run against the baseline, then against the defended version, and the attack success rate is compared.
 
