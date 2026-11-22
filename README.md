@@ -1,4 +1,4 @@
-# agent-lab: securing a tool-using AI support agent
+# Agent-Lab: Red-Teaming an AI Support Agent and Building Its Security Harness
 
 I built a deliberately insecure customer-support agent, threat-modeled it, attacked it with a fixed suite of 27 attacks, then moved the defenses into the harness (the code around the model) and measured again.
 
