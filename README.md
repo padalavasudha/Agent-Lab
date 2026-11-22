@@ -119,3 +119,11 @@ python summarize.py
 ## Safety
 
 Lab use only. All customer data is fabricated, emails are written to an in-memory list and never sent, and Ollama listens on localhost only. Do not point the baseline agent at real data or real tools.
+
+
+## Author
+```Bash
+Vasudha Padala
+Masters in Computer Science
+University of Southern California
+```
